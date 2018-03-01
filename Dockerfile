@@ -20,8 +20,11 @@ RUN apt-get install -y curl zip unzip git software-properties-common \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /vat/tmp/*
 
+RUN apt-get clean && apt-get update && apt-get install -y php-xdebug
+
 ADD php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
 ADD www.conf /etc/php/7.1/fpm/pool.d/www.conf
+ADD xdebug.ini /etc/php/7.1/mods-available/xdebug.ini
 
 # port
 EXPOSE 9000
